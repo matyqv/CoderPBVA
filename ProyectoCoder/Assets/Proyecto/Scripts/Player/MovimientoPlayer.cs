@@ -7,13 +7,22 @@ public class MovimientoPlayer : MonoBehaviour
     public float speed;
     public Transform Skin;
     public Bujula Brujula;
-    public int X , Z;
+    private int X , Z;
 
     public Vector3 V;
-    public float magnitud;
+    private float magnitud;
     public Animator Anim;
-    public bool vive;
+   [SerializeField] private bool vive=true;
     public CharacterController CC;
+    private float gravedad;
+    [SerializeField] private int Ruido;
+
+    public int Ruido1 { get => Ruido; set => Ruido = value; }
+    public float Gravedad1 { get => gravedad; set => gravedad = value; }
+    public int X1 { get => X; set => X = value; }
+    public int Z1 { get => Z; set => Z = value; }
+    public bool Vive { get => vive; set => vive = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,26 +33,27 @@ public class MovimientoPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(vive)
+        if(Vive)
         {
-            if (Input.GetKey(KeyCode.A)) { X = -1; }
-            else if (Input.GetKey(KeyCode.D)) { X = 1; }
-            else { X = 0; }
+            if (Input.GetKey(KeyCode.A)) { X1 = -1; }
+            else if (Input.GetKey(KeyCode.D)) { X1 = 1; }
+            else { X1 = 0; }
 
-            if (Input.GetKey(KeyCode.W)) { Z = 1; }
-            else if (Input.GetKey(KeyCode.S)) { Z = -1; }
-            else { Z = 0; }
+            if (Input.GetKey(KeyCode.W)) { Z1 = 1; }
+            else if (Input.GetKey(KeyCode.S)) { Z1 = -1; }
+            else { Z1 = 0; }
 
-            if (X == 0 && Z == 0)
+            if (X1 == 0 && Z1 == 0)
             {
                 Anim.SetInteger("Move", 0);
+                Ruido1 = 0;
             }
 
             else
             {
                 if (!Anim.GetCurrentAnimatorStateInfo(0).IsTag("AT"))
                 {
-                    Rot(new Vector3(X, 0, Z));
+                    Rot(new Vector3(X1, 0, Z1));
                     Anim.SetInteger("Move", 1);
                 }
             }
@@ -57,7 +67,19 @@ public class MovimientoPlayer : MonoBehaviour
                 Roll();
             }
 
-            Gravedad(1);
+            Gravedad();
+
+          
+            if (CC.isGrounded)
+            {
+                Gravedad1 = 15f;
+                Anim.SetBool("EnPiso", true);
+            }
+            else
+            {               
+                Gravedad1 += 0.5f;
+                Invoke("Caer",15 * Time.deltaTime);
+            }
         }
 
     }
@@ -71,24 +93,34 @@ public class MovimientoPlayer : MonoBehaviour
     public void Roll()
     {
         Mov(Brujula.transform.forward, 1.6f);
+        Ruido1 = 1;
     }
 
     public void Mov(Vector3 V,float S)
     {
          Vector3 Gravedad = Vector3.down * 9.8f;
 
-            CC.Move((Brujula.transform.forward* speed)* Time.deltaTime*S);
+            CC.Move((V* speed)* Time.deltaTime*S);
+            Ruido1 = 2;
     }
 
-    public void Gravedad(float S)
+    public void Gravedad()
     {
-        Vector3 Gravedad = Vector3.down * 25f;
-        CC.Move(Gravedad * Time.deltaTime * S);
+        Vector3 Gravedad = Vector3.down * Gravedad1;
+        CC.Move(Gravedad * Time.deltaTime);
     }
 
     public void muerte()
     {
-        vive = false;
+        Vive = false;
         Anim.SetTrigger("Die");
+    }
+    public void Caer()
+    {
+        if (!CC.isGrounded)
+        {
+            Anim.SetBool("EnPiso", false);
+            Mov(Brujula.transform.forward, 0.5f);
+        }
     }
 }

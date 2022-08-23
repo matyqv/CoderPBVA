@@ -6,6 +6,7 @@ public class UbicacionDeArma : MonoBehaviour
 {
     public Transform R_Hand;
     public Transform Arma;
+    [SerializeField] DañoDeEspada AtK;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,5 +18,10 @@ public class UbicacionDeArma : MonoBehaviour
     {
         Arma.transform.position = R_Hand.transform.position;
         Arma.transform.rotation = R_Hand.transform.rotation;
+    }
+
+    public void Ataque()
+    {
+        AtK.ATK();
     }
 }

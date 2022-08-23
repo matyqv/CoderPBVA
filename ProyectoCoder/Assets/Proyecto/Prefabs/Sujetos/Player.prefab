@@ -298,7 +298,7 @@ Transform:
   - {fileID: 8241886094685750274}
   - {fileID: 7940406308612260215}
   m_Father: {fileID: 2096715472741302502}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1288834339277704221
 GameObject:
@@ -655,6 +655,7 @@ Transform:
   m_Children:
   - {fileID: 6605098711909445082}
   - {fileID: 8928461697688760796}
+  - {fileID: 105835021806706231}
   - {fileID: 1288834338720410480}
   m_Father: {fileID: 4977363982678363270}
   m_RootOrder: 0
@@ -1033,6 +1034,36 @@ Transform:
   m_Father: {fileID: 6315641834000542595}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -55.66883, y: 23.43877, z: -48.92724}
+--- !u!1 &3396711342683849799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 105835021806706231}
+  m_Layer: 0
+  m_Name: ~InteraccionMapa~
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &105835021806706231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3396711342683849799}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2096715472741302502}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3503146732792852677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,13 +1829,11 @@ MonoBehaviour:
   speed: 10
   Skin: {fileID: 2096715472741302502}
   Brujula: {fileID: 1288834339721605957}
-  X: 0
-  Z: 0
   V: {x: 0, y: 0, z: 0}
-  magnitud: 0
   Anim: {fileID: 0}
   vive: 1
   CC: {fileID: 0}
+  Ruido: 0
 --- !u!114 &1288834339987442229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1822,7 +1851,8 @@ MonoBehaviour:
   Rol: 108
   Anim: {fileID: 813164399673254480}
   movimiento: {fileID: 0}
-  "Da\xF1oDEspada": {fileID: 0}
+  tiempoAtaque: 0
+  tiempoRotar: 0
 --- !u!114 &7451045207313548152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1839,8 +1869,8 @@ MonoBehaviour:
   HPInicial: 4
   Player: {fileID: 0}
   Anim: {fileID: 0}
-  UnidadesVida: []
   UnidadDeVida: {fileID: 0}
+  UnidadDeVidaBase: {fileID: 0}
 --- !u!143 &8197888556493348848
 CharacterController:
   m_ObjectHideFlags: 0

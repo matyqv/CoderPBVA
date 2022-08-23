@@ -25,6 +25,8 @@ public class Flecha : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other!=null) { speed = 0; }
+
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerHp>().RestarVida(Damage, transform.forward);

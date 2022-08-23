@@ -5,27 +5,22 @@ using UnityEngine.UI;
 
 public class PlayerHp : MonoBehaviour
 {
-    [Range(1, 8)]
+    [Range(1, 10)]
     public float HP;
-    [Range(4, 8)]
+    [Range(4, 10)]
     public int HPInicial;
+    float HPInicial_;
     public MovimientoPlayer Player;
     public Animator Anim;
     
-    public GameObject [] UnidadesVida;
-    public GameObject UnidadDeVida;
+    public Image UnidadDeVida;
+    public Image UnidadDeVidaBase;
     // Start is called before the first frame update
     void Start()
     {
         Player = GetComponent<MovimientoPlayer>();
         Anim = Player.Skin.GetComponent<Animator>();
-        UnidadesVida = new GameObject[8];
         HP = HPInicial;
-
-        for (int i = 0; i < UnidadesVida.Length; i++)
-        {
-            UnidadesVida[i] = UnidadDeVida.transform.GetChild(i).transform.gameObject;
-        }
 
         RevisarVida();
     }
@@ -38,7 +33,7 @@ public class PlayerHp : MonoBehaviour
 
     public void RestarVida(float Daño, Vector3 V)
     {
-        if (Player.vive)
+        if (Player.Vive)
         {
             Time.timeScale = 0.05f;
             Invoke("TimeIs1", 0.1f * Time.deltaTime);
@@ -60,12 +55,10 @@ public class PlayerHp : MonoBehaviour
 
     void RevisarVida()
     {
+        HPInicial_ = HPInicial;
+        float Tamaño = HPInicial_ / 10;
+        UnidadDeVida.fillAmount = (HP / 10);
+        UnidadDeVidaBase.fillAmount = Tamaño;
         Debug.Log("Vida REstadt");
-        for (int i = 1; i < UnidadesVida.Length+1; i++)
-        {
-            if (i <= HPInicial) { UnidadesVida[i-1].SetActive(true); } else { UnidadesVida[i-1].SetActive(false); }
-            Image HPX= UnidadesVida[i-1].transform.GetChild(0).GetComponent<Image>();
-            if (i-1 < Mathf.RoundToInt(HP)) { HPX.enabled=true; } else { HPX.enabled = false; }
-        }
     }
 }

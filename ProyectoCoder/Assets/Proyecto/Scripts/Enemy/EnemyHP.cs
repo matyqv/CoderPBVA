@@ -36,8 +36,7 @@ public class EnemyHP : MonoBehaviour
             Invoke("TimeIs1", 0.1f*Time.deltaTime);
             Anim.SetTrigger("Hit");
             HP -= Daño;
-            EnemyMov.GetComponent<Rigidbody>().AddForce(V*3,ForceMode.Impulse);
-          //  EnemyMov.Movimiento(V, Daño * 15);
+            EnemyMov.Movimiento(V*Daño,1);
             if (HP <= 0)
             {
                 EnemyMov.Vive = false;

@@ -10,7 +10,11 @@ public class UbicacionDeArma : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        R_Hand = transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
+        if (R_Hand == null)
+        {
+            R_Hand = transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
+
+        }
     }
 
     // Update is called once per frame
@@ -23,5 +27,8 @@ public class UbicacionDeArma : MonoBehaviour
     public void Ataque()
     {
         AtK.ATK();
+
+        GestorSonidos GS = transform.parent.GetComponent<GestorSonidos>();
+        GS.Rep_Espada1();
     }
 }

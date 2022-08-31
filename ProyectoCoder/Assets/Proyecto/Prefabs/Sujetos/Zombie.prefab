@@ -692,6 +692,10 @@ MonoBehaviour:
   CC: {fileID: 0}
   DistanciaAtaque: 2.5
   Detector: {fileID: 1328979328151385398}
+  Experiencia: {fileID: 7299984089245283828, guid: 868b35f5d70121d4fbb8c406d729be04, type: 3}
+  Exp: 3
+  Peso: 1
+  RedVelocidadLerp: 0
   zombiType: 0
 --- !u!114 &8052647807160423743
 MonoBehaviour:
@@ -707,7 +711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 3
   Anim: {fileID: 937048383919517119}
-  Mat: {fileID: 2100000, guid: 1b2d345e25efb30418d89947a8c1143e, type: 2}
+  Mat: {fileID: 2100000, guid: fa9a42a99d2d00842a3d2245d6a5b709, type: 2}
   Mesh: {fileID: 7349133362744655028}
   Shad: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   EnemyMov: {fileID: 0}
@@ -728,7 +732,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.3, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &5793951625454200356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,8 +749,9 @@ MonoBehaviour:
   Vision: {fileID: 1011998805451003569}
   DP: {fileID: 1328979328151385398}
   DistanciaDetectar: 22
-  Target: {fileID: 8052647808491338123}
+  Target: {fileID: 0}
   Brujula: {fileID: 8052647808491338123}
+  detectado: 0
 --- !u!1 &1980853490494540276
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,7 +833,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1b2d345e25efb30418d89947a8c1143e, type: 2}
+  - {fileID: 2100000, guid: 7bb221b95b2eda54a9e7a487521d55f8, type: 2}
+  - {fileID: 2100000, guid: 7bb221b95b2eda54a9e7a487521d55f8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2521,7 +2527,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9088491432021635200}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.7, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4947304760815031002}

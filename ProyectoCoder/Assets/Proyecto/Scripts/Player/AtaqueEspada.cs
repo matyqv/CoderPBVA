@@ -6,7 +6,6 @@ public class AtaqueEspada : MonoBehaviour
 {
 
     public KeyCode Ataque;
-    public KeyCode Salto;
     public KeyCode Rol;
 
     public Animator Anim;
@@ -37,23 +36,27 @@ public class AtaqueEspada : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(Ataque) && !Anim.GetCurrentAnimatorStateInfo(0).IsTag("NO"))
+          Ataque=GameManager.Attack1;
+         Rol=GameManager.Roll1;
+           AnimatorStateInfo State = Anim.GetCurrentAnimatorStateInfo(0);
+
+        if (Input.GetKeyUp(Ataque) && !State.IsTag("NO"))
         {
             AnimacionAtaque();
         }
-        if (Input.GetKeyUp(Rol) && !Anim.GetCurrentAnimatorStateInfo(0).IsTag("NO"))
+        if (Input.GetKeyUp(Rol) && !State.IsTag("NO"))
         {
-            if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("Roll"))
+            if (!State.IsName("Roll"))
             {
                 Roll();
             }
         }
 
-        if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Hit0") || Anim.GetCurrentAnimatorStateInfo(0).IsName("Hit1"))
+        if (State.IsName("Hit0") || State.IsName("Hit1"))
         {
             movimiento.Mov(movimiento.Brujula.transform.forward,.3f);
         }
-        else if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Hit2"))
+        else if (State.IsName("Hit2"))
         {
             movimiento.Mov(movimiento.Brujula.transform.forward, .15f);
         }
@@ -61,19 +64,20 @@ public class AtaqueEspada : MonoBehaviour
 
     void AnimacionAtaque()
     {
+        AnimatorStateInfo State = Anim.GetCurrentAnimatorStateInfo(0);
         if (PuedeAtacar)
         {
-            if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") || Anim.GetCurrentAnimatorStateInfo(0).IsName("run"))
+            if (State.IsName("Idle") || State.IsName("run"))
             {
                 Anim.SetTrigger("Hit");
             }
 
-            if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Hit0"))
+            if (State.IsName("Hit0"))
             {
                 Anim.SetTrigger("Hit2");
             }
 
-            if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Hit1"))
+            if (State.IsName("Hit1"))
             {
                 Anim.SetTrigger("Hit3");
                 PuedeAtacar = false;
@@ -86,6 +90,10 @@ public class AtaqueEspada : MonoBehaviour
     {
         if(PuedeRotar)
         {
+
+            GestorSonidos GS = GetComponent<GestorSonidos>();
+            GS.Rep_Rol();
+
             Anim.SetTrigger("Rol");
             PuedeRotar = false;
             Invoke("reestablecerRotacion", TiempoRotar * Time.deltaTime);

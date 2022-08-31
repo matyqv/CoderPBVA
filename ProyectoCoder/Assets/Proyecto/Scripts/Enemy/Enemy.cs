@@ -18,6 +18,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float DistanciaAtaque;
 
     public DetectarPlayer Detector;
+    public GameObject Experiencia;
+    [Range(3,120)]
+    [SerializeField]private int Exp;
+    [SerializeField]private int Peso;
+    [SerializeField] float RedVelocidadLerp;
 
     public enum Zombie
     {
@@ -42,7 +47,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+
         if (Vive)
         {
             switch (zombiType)
@@ -65,41 +70,50 @@ public class Enemy : MonoBehaviour
 
         }
         else { Muerto(); }
-
+      
         Gravedad();
 
+        AnimatorStateInfo StatInfo = Anim.GetCurrentAnimatorStateInfo(0);
+        if (StatInfo.IsTag("AT"))
+        {
+            RedVelocidadLerp = 3f;
+        }
+        else if (!StatInfo.IsTag("AT")) { RedVelocidadLerp = 1; }
     }
 
     void Guardia()
     {
-        Skin.transform.rotation = Quaternion.Lerp(Skin.rotation, Brujula.rotation, 15*Time.deltaTime);
+        RotacionLerp(15);
         zombiType = Zombie.Perseguir;
     }
     void Mirar()
     {
         Brujula.LookAt(target);
-        Skin.transform.rotation = Quaternion.Lerp(Skin.rotation, Brujula.rotation, 40 * Time.deltaTime);
+        RotacionLerp(40);
+        Anim.SetInteger("Move", 0);
     }
     void Reposo()
     {
-        Anim.SetInteger("Move", 0);         
+        Anim.SetInteger("Move", 0);
     }
     void Perseguir()
     {
-        Vector3 Target = new Vector3(target.position.x, transform.position.y, target.position.z); 
-        Brujula.LookAt(Target);
-        Skin.transform.rotation = Quaternion.Lerp(Skin.rotation, Brujula.rotation, 150 * Time.deltaTime);
-        float distance = Vector3.Distance(transform.position , Target);
-        float distance_atack = Vector3.Distance(target.position , transform.position);
+        AnimatorStateInfo StatInfo = Anim.GetCurrentAnimatorStateInfo(0);
 
-        if (distance > DistanciaAtaque && !Anim.GetCurrentAnimatorStateInfo(0).IsName("GetHit"))
+        Vector3 Target = new Vector3(target.position.x, transform.position.y, target.position.z);
+        Brujula.LookAt(Target);
+        RotacionLerp(40);
+        float distance = Vector3.Distance(transform.position, Target);
+        float distance_atack = Vector3.Distance(target.position, transform.position);
+
+        if (distance > DistanciaAtaque && !StatInfo.IsName("GetHit"))
         {
             Anim.SetInteger("Move", 1);
             NoAtacar();
         }
         else
         {
-            if (!Anim.GetCurrentAnimatorStateInfo(0).IsTag("Hit"))
+            if (!StatInfo.IsTag("Hit"))
             {
                 if (distance_atack < DistanciaAtaque)
                 {
@@ -110,10 +124,11 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
+        if (StatInfo.IsName("Walk"))
         {
             Movimiento(Skin.forward, 1);
         }
+
     }
 
 
@@ -121,7 +136,8 @@ public class Enemy : MonoBehaviour
     //Variables Simples______________________________________________________
     public void Gravedad()
     {
-        CC.Move(Vector3.down*35 * Time.deltaTime);
+        Skin.transform.localPosition=new Vector3(0, 0, 0);
+        CC.Move(Vector3.down * 35 * Time.deltaTime);
     }
 
     void Atacar()
@@ -130,21 +146,33 @@ public class Enemy : MonoBehaviour
     { Anim.SetBool("Atk", false); }
     public void Movimiento(Vector3 V, float S)
     {
-        CC.Move(V * Speed * Time.deltaTime * S);
+        CC.Move(V * Speed/Peso * Time.deltaTime * S);
     }
+
+    
     void Muerto()
     {
+        AnimatorStateInfo StatInfo = Anim.GetCurrentAnimatorStateInfo(0);
         NoAtacar();
         Anim.SetTrigger("Die");
-        Destroy(GetComponent<Rigidbody>());
-        Destroy(GetComponent<CapsuleCollider>());
-        if (Anim.GetCurrentAnimatorStateInfo(0).IsName("KO"))
+        CC.enabled = false;
+        if (StatInfo.IsName("KO"))
         {
             Destroy(this.gameObject);
         }
     }
     void VolverAlReposo()
     { zombiType = Zombie.Reposo; }
+    void RotacionLerp(float V_Rotacion)
+    {
+        float r = V_Rotacion / RedVelocidadLerp;
+        Skin.transform.rotation = Quaternion.Lerp(Skin.rotation, Brujula.rotation, r * Time.deltaTime);
+    }
+    public void DropEXp()
+    {
+        Experiencia.GetComponent<OrbeExperiencia>().Experiencia = Exp;
+        Instantiate(Experiencia, transform.position, Quaternion.identity);
+    }
     public void AsignarTarget(Transform T)
     {
         if (target == null)
@@ -152,5 +180,15 @@ public class Enemy : MonoBehaviour
              target = T;
         }
     }
+    // RecibeImpacto
+    public void RecibeImpulsoAtaque(Vector3 Vs, float Ss)
+    {
+        for (float i=Ss ; i>0 ; i -= 1 * Time.deltaTime)
+        {
+            transform.Translate(Vs * 1 / Peso * Time.deltaTime * i);
+        }
+    }
+
+
 
 }

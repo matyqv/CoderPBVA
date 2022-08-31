@@ -13,6 +13,7 @@ public class MovimientoPlayer : MonoBehaviour
     private float magnitud;
     public Animator Anim;
    [SerializeField] private bool vive=true;
+   [SerializeField] private bool GravedadOn=true;
     public CharacterController CC;
     private float gravedad;
     [SerializeField] private int Ruido;
@@ -22,12 +23,19 @@ public class MovimientoPlayer : MonoBehaviour
     public int X1 { get => X; set => X = value; }
     public int Z1 { get => Z; set => Z = value; }
     public bool Vive { get => vive; set => vive = value; }
+    public bool GravedadOn1 { get => GravedadOn; set => GravedadOn = value; }
+
+    public KeyCode But_Up;
+    public KeyCode But_Dw;
+    public KeyCode But_R;
+    public KeyCode But_L;
 
     // Start is called before the first frame update
     void Start()
     {
         Anim = Skin.GetComponent<Animator>();
         CC=GetComponent<CharacterController>();
+
     }
 
     // Update is called once per frame
@@ -35,12 +43,17 @@ public class MovimientoPlayer : MonoBehaviour
     {
         if(Vive)
         {
-            if (Input.GetKey(KeyCode.A)) { X1 = -1; }
-            else if (Input.GetKey(KeyCode.D)) { X1 = 1; }
+            But_Up = GameManager.Up1;
+            But_Dw = GameManager.Down1;
+            But_R = GameManager.Right1;
+            But_L = GameManager.Left1;
+
+            if (Input.GetKey(But_L)) { X1 = -1; }
+            else if (Input.GetKey(But_R)) { X1 = 1; }
             else { X1 = 0; }
 
-            if (Input.GetKey(KeyCode.W)) { Z1 = 1; }
-            else if (Input.GetKey(KeyCode.S)) { Z1 = -1; }
+            if (Input.GetKey(But_Up)) { Z1 = 1; }
+            else if (Input.GetKey(But_Dw)) { Z1 = -1; }
             else { Z1 = 0; }
 
             if (X1 == 0 && Z1 == 0)
@@ -106,8 +119,12 @@ public class MovimientoPlayer : MonoBehaviour
 
     public void Gravedad()
     {
-        Vector3 Gravedad = Vector3.down * Gravedad1;
-        CC.Move(Gravedad * Time.deltaTime);
+        if (GravedadOn1)
+        {
+            Vector3 Gravedad = Vector3.down * Gravedad1;
+            CC.Move(Gravedad * Time.deltaTime);
+            Skin.transform.localPosition = new Vector3(0, -0.55f, 0);
+        }
     }
 
     public void muerte()

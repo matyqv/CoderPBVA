@@ -9,6 +9,7 @@ public class Puerta : MonoBehaviour
     [SerializeField] Vector3 Direccion;
 
     public ScriptPalanca Palanca;
+    public ScriptPalanca[] Palancas;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,28 +20,51 @@ public class Puerta : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Palanca.Activado1) { Cerrar(); }
-        if (!Palanca.Activado1) { Abrir(); }
+        if (Palancas[0].Activado1 && Palancas[1].Activado1)
+        {
+            Cerrar();
+        }
+        if (!Palancas[0].Activado1 && !Palancas[1].Activado1)
+        {
+            Abrir();
+        }
     }
 
     void Abrir()
     {
+        AudioSource AS = GetComponent<AudioSource>();
         Vector3 Mov= Movimiento - PosicionInicial;
         float Distancia = Vector3.Distance(transform.position, Movimiento);
-        if (Distancia > 0.3f)
+        if (Distancia > 0.5f)
         {
-            transform.Translate(Mov*Time.deltaTime);
+            transform.Translate(Mov * 0.5f * Time.deltaTime);
+
+            if (!AS.isPlaying)
+            {
+                AS.Play();
+            }
+        }
+        else
+        {
+            AS.Stop();
         }
     }
 
     void Cerrar()
     {
+        AudioSource AS = GetComponent<AudioSource>();
         Vector3 Mov = Movimiento - PosicionInicial;
         float Distancia = Vector3.Distance(transform.position, PosicionInicial);
         float DistanciaPrimaria = Vector3.Distance(Direccion, PosicionInicial);
-        if (Distancia > DistanciaPrimaria/10)
+        if (Distancia > 0.5f)
         {
-            transform.Translate(-Mov * 0.01f * Time.deltaTime);
+            transform.Translate(-Mov * 0.5f * Time.deltaTime);
+
+            if (!AS.isPlaying)
+            {
+                AS.Play();
+            }
         }
+        else { AS.Stop(); }
     }
 }

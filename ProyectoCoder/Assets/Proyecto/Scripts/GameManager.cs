@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public bool dontDestroyOnLoad;
     public static Dictionary<string,GameObject> Keys_;
 
+    private static AudioSource AS;
+    private static AudioSource Musica_AS;
+
     private static KeyCode Up;
     private static KeyCode Down;
     private static KeyCode Left;
@@ -27,6 +30,8 @@ public class GameManager : MonoBehaviour
     public static KeyCode Attack1 { get => Attack; set => Attack = value; }
     public static KeyCode Roll1 { get => Roll; set => Roll = value; }
     public static KeyCode Interactuar1 { get => Interactuar; set => Interactuar = value; }
+    public static AudioSource AS1 { get => AS; set => AS = value; }
+    public static AudioSource Musica_AS1 { get => Musica_AS; set => Musica_AS = value; }
 
 
     // Start is called before the first frame update
@@ -44,10 +49,14 @@ public class GameManager : MonoBehaviour
         { Destroy(gameObject); }
     }
 
+    private void Start()
+    {
+        AS1 = GetComponentInChildren<AudioSource>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
     }
 
 }

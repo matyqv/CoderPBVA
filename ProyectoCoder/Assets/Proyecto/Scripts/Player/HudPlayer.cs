@@ -9,6 +9,7 @@ public class HudPlayer : MonoBehaviour
     public TextMeshProUGUI Exp;
     public Text Button_Att;
     public Text Button_Roll;
+    
 
     // Start is called before the first frame update
     void Start()

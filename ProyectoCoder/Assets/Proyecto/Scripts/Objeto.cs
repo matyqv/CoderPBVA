@@ -7,6 +7,7 @@ public class Objeto : MonoBehaviour
 
     public string NAME;
     public GameObject GO;
+    public AudioClip GetObjeto;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,8 @@ public class Objeto : MonoBehaviour
         {
             Debug.Log(other.tag);
             PlayerKeys KY=other.GetComponent<PlayerKeys>();
-            
+
+            GameManager.AS1.PlayOneShot(GetObjeto,1f);
             KY.AdherirKey(this.transform.gameObject);
         }
     }

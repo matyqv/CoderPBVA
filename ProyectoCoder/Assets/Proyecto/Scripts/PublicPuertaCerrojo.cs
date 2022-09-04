@@ -13,6 +13,7 @@ public class PublicPuertaCerrojo : MonoBehaviour
     [SerializeField] bool Abierta;
     [SerializeField] TextMeshProUGUI Texto;
     [SerializeField] Image Panel;
+    [SerializeField] AudioClip SonidoPuerta;
     
 
     // Start is called before the first frame update
@@ -39,6 +40,7 @@ public class PublicPuertaCerrojo : MonoBehaviour
         }
         yield return null;
 
+        GameManager.AS1.PlayOneShot(SonidoPuerta);
         for (int i = 90; i > 0; i--)
         {
             Vector3 V = new Vector3(0, 0, i);

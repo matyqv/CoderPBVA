@@ -794,6 +794,8 @@ MonoBehaviour:
   Mesh: {fileID: 7349133362744655028}
   Shad: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   EnemyMov: {fileID: 0}
+  SonidoGolpeRecibido: {fileID: 8300000, guid: 79f8cbedb9b83354482b9c22f3a043ab, type: 3}
+  sonidoQuejido: {fileID: 8300000, guid: 4b5f9ad86cc6ab445a62a60ea993f41a, type: 3}
 --- !u!143 &1943866143309183275
 CharacterController:
   m_ObjectHideFlags: 0

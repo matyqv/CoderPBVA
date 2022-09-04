@@ -99,6 +99,7 @@ MonoBehaviour:
   Abierta: 0
   Texto: {fileID: 4168952375220549758}
   Panel: {fileID: 1927254508253025096}
+  SonidoPuerta: {fileID: 8300000, guid: 4ccac9bcc4ccaf4498561c65eb4cabed, type: 3}
 --- !u!1 &2311756000958191464
 GameObject:
   m_ObjectHideFlags: 0

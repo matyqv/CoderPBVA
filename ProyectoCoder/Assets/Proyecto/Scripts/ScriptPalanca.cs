@@ -20,6 +20,7 @@ public class ScriptPalanca : MonoBehaviour
     [SerializeField] private bool Activado=true;
     public GameObject Button;
 
+    public AudioClip PalancaClip;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +36,8 @@ public class ScriptPalanca : MonoBehaviour
             Interaccion = GameManager.Interactuar1;
             if (Input.GetKeyDown(Interaccion1) && !Moviendo)
             {
-                AudioSource AS = GetComponent<AudioSource>();
-                AS.Play();
+                AudioSource AS = GameManager.AS1;
+                AS.PlayOneShot(PalancaClip,0.7f);
                 Moviendo = true;
                 Button.SetActive(false);
             }
@@ -74,7 +75,6 @@ public class ScriptPalanca : MonoBehaviour
     }
     void TerminarDeMoverPalanca()
     {
-        //  Palanca.transform.parent = this.transform;
         Moviendo = false;
         bool On = !Activado1;
         Activado1 = On;

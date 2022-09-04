@@ -281,6 +281,7 @@ MonoBehaviour:
   Text: {fileID: 8657957652729462572}
   Activado: 1
   Button: {fileID: 1888910638010204005}
+  PalancaClip: {fileID: 8300000, guid: d0107e8330675654fa43158d48186042, type: 3}
 --- !u!65 &4427448325363838572
 BoxCollider:
   m_ObjectHideFlags: 0

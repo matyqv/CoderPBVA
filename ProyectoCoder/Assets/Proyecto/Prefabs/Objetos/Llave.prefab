@@ -97,6 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4b3bcdd6195e0e47a6284d99db0f105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NAME: 
+  GO: {fileID: 0}
+  GetObjeto: {fileID: 8300000, guid: 4bfac15be46d06c469401298261c73d6, type: 3}
 --- !u!65 &8244675605780208698
 BoxCollider:
   m_ObjectHideFlags: 0

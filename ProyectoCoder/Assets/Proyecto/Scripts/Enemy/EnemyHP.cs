@@ -12,6 +12,9 @@ public class EnemyHP : MonoBehaviour
     [SerializeField] private Shader Shad;
     [SerializeField] private Enemy EnemyMov;
 
+    [SerializeField] private AudioClip SonidoGolpeRecibido;
+    [SerializeField] private AudioClip sonidoQuejido;
+
     public float HP1 { get => HP; set => HP = value; }
 
     // Start is called before the first frame update
@@ -46,6 +49,8 @@ public class EnemyHP : MonoBehaviour
                 EnemyMov.Vive = false;
                 EnemyMov.DropEXp();
             }
+            GameManager.AS1.PlayOneShot(SonidoGolpeRecibido,0.3f);
+            GameManager.AS1.PlayOneShot(sonidoQuejido, 0.3f);
         }
     }
 

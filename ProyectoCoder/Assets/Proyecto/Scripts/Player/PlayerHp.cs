@@ -13,8 +13,9 @@ public class PlayerHp : MonoBehaviour
     public MovimientoPlayer Player;
     public Animator Anim;
     
-    public Image UnidadDeVida;
-    public Image UnidadDeVidaBase;
+    [SerializeField] private Image UnidadDeVida;
+    [SerializeField] private Image UnidadDeVidaBase;
+    [SerializeField] private GameObject PlacaDeMuerte;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +45,7 @@ public class PlayerHp : MonoBehaviour
             if (HP <= 0)
             {
                 Player.muerte();
+                PlacaDeMuerte.SetActive(true);
             }
         }
     }

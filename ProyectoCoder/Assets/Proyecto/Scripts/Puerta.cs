@@ -10,6 +10,10 @@ public class Puerta : MonoBehaviour
 
     public ScriptPalanca Palanca;
     public ScriptPalanca[] Palancas;
+
+    public AudioClip PuertaClip;
+
+    int Sonido=-1;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,49 +26,42 @@ public class Puerta : MonoBehaviour
     {
         if (Palancas[0].Activado1 && Palancas[1].Activado1)
         {
+            if (Sonido==1) { dispararSonido(); }
             Cerrar();
         }
         if (!Palancas[0].Activado1 && !Palancas[1].Activado1)
         {
+            if (Sonido ==-1) { dispararSonido(); }
             Abrir();
         }
     }
 
     void Abrir()
     {
-        AudioSource AS = GetComponent<AudioSource>();
         Vector3 Mov= Movimiento - PosicionInicial;
         float Distancia = Vector3.Distance(transform.position, Movimiento);
         if (Distancia > 0.5f)
         {
-            transform.Translate(Mov * 0.5f * Time.deltaTime);
-
-            if (!AS.isPlaying)
-            {
-                AS.Play();
-            }
-        }
-        else
-        {
-            AS.Stop();
+            transform.Translate(Mov * 0.5f * Time.deltaTime);          
         }
     }
 
     void Cerrar()
     {
-        AudioSource AS = GetComponent<AudioSource>();
         Vector3 Mov = Movimiento - PosicionInicial;
         float Distancia = Vector3.Distance(transform.position, PosicionInicial);
         float DistanciaPrimaria = Vector3.Distance(Direccion, PosicionInicial);
         if (Distancia > 0.5f)
         {
             transform.Translate(-Mov * 0.5f * Time.deltaTime);
-
-            if (!AS.isPlaying)
-            {
-                AS.Play();
-            }
         }
-        else { AS.Stop(); }
+    }
+
+    void dispararSonido()
+    {
+        AudioSource AS = GameManager.AS1;
+        AS.PlayOneShot(PuertaClip,.6f);
+        Sonido =-Sonido;
+
     }
 }

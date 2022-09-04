@@ -13,6 +13,9 @@ public class ControlManager : MonoBehaviour
     public  KeyCode Attack;
     public  KeyCode Roll;
     public  KeyCode Interactuar;
+
+    public AudioSource AS;
+    public AudioSource Musica_AS;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,9 @@ public class ControlManager : MonoBehaviour
         GameManager.Attack1= Attack;
         GameManager.Roll1 = Roll;
         GameManager.Interactuar1 = Interactuar;
+
+        GameManager.AS1 = AS;
+        GameManager.Musica_AS1 = Musica_AS;
     }
 
     // Update is called once per frame

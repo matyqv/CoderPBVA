@@ -52,12 +52,16 @@ public class FuncionDisparo : MonoBehaviour
             {
                 PlayerHp PJHP = hit.transform.GetComponent<PlayerHp>();
                 PJHP.RestarVida(1, WP_Disparo.forward);
-             
             }
         }
         else
         {
-          
         }
+        transform.GetComponentInParent<Pistolero_Enemy>().LerpChange(1);
+    }
+
+    public void Lerp0()
+    {
+        transform.GetComponentInParent<Pistolero_Enemy>().LerpChange(1000);
     }
 }

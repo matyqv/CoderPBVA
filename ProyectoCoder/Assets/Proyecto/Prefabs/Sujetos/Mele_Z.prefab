@@ -583,12 +583,12 @@ GameObject:
   - component: {fileID: 3412708049105469692}
   - component: {fileID: 2268365634034667450}
   - component: {fileID: 5208577644766655513}
-  - component: {fileID: 8052647807160423717}
   - component: {fileID: 8052647807160423743}
   - component: {fileID: 1943866143309183275}
   - component: {fileID: 5793951625454200356}
+  - component: {fileID: 4869135371109657596}
   m_Layer: 0
-  m_Name: Zombie
+  m_Name: Mele_Z
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -673,30 +673,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Skin: {fileID: 8052647808491338123}
   Damage: 0
---- !u!114 &8052647807160423717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1943866143309183268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd8444fb7969c5b49b68c444b7a252bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Brujula: {fileID: 8052647808491338123}
-  Skin: {fileID: 2767896801527049692}
-  target: {fileID: 0}
-  speed: 4.9
-  CC: {fileID: 0}
-  DistanciaAtaque: 2.5
-  Detector: {fileID: 1328979328151385398}
-  Experiencia: {fileID: 7299984089245283828, guid: 868b35f5d70121d4fbb8c406d729be04, type: 3}
-  Exp: 3
-  Peso: 1
-  RedVelocidadLerp: 0
-  zombiType: 0
 --- !u!114 &8052647807160423743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -754,6 +730,28 @@ MonoBehaviour:
   Target: {fileID: 0}
   Brujula: {fileID: 8052647808491338123}
   detectado: 0
+--- !u!114 &4869135371109657596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943866143309183268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77be5346002d79341883bbcc77125352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ZD: {fileID: 11400000, guid: 6af105ee3caf0a54c9a00ea74d810f00, type: 2}
+  target: {fileID: 0}
+  Exp: 3
+  Brujula: {fileID: 8052647808491338123}
+  Skin: {fileID: 2767896801527049692}
+  CC: {fileID: 0}
+  Anim: {fileID: 0}
+  Detector: {fileID: 1328979328151385398}
+  Experiencia: {fileID: 7299984089245283828, guid: 868b35f5d70121d4fbb8c406d729be04, type: 3}
+  zombiType: 0
 --- !u!1 &1980853490494540276
 GameObject:
   m_ObjectHideFlags: 0

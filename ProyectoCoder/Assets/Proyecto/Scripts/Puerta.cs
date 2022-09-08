@@ -12,6 +12,7 @@ public class Puerta : MonoBehaviour
     public ScriptPalanca[] Palancas;
 
     public AudioClip PuertaClip;
+    public AudioClip CandadoClip;
 
     int Sonido=-1;
     // Start is called before the first frame update
@@ -61,6 +62,7 @@ public class Puerta : MonoBehaviour
     {
         AudioSource AS = GameManager.AS1;
         AS.PlayOneShot(PuertaClip,.6f);
+        AS.PlayOneShot(CandadoClip, .6f);
         Sonido =-Sonido;
 
     }

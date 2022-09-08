@@ -61,6 +61,5 @@ public class PlayerHp : MonoBehaviour
         float Tamaño = HPInicial_ / 10;
         UnidadDeVida.fillAmount = (HP / 10);
         UnidadDeVidaBase.fillAmount = Tamaño;
-        Debug.Log("Vida REstadt");
     }
 }

@@ -43,7 +43,7 @@ public class EnemyHP : MonoBehaviour
             Invoke("TimeIs1", 0.1f*Time.deltaTime);
             Anim.SetTrigger("Hit");
             HP1 -= Daño;
-            EnemyMov.RecibeImpulsoAtaque(V,1.5f);
+            StartCoroutine(EnemyMov.RecibeImpulsoAtaque(V, 1.5f));
             if (HP1 <= 0)
             {
                 EnemyMov.Vive = false;

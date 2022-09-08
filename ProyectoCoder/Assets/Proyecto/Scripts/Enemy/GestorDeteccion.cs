@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class GestorDeteccion : MonoBehaviour
 {
-    public Transform Head;
-    public Transform Vision;
+    [Header("Dinamicas")]
 
-    public DetectarPlayer DP;
+    public Transform Target;
+    [SerializeField] float detectado;
+
+    [Header("Estaticas")]
+
+    [SerializeField] private Transform Brujula;
+    [SerializeField] private Transform Head;
+    [SerializeField] private Transform Vision;
+    [SerializeField] private DetectarPlayer DP;
     [Range(0, 30)]
     [SerializeField] private float DistanciaDetectar;
-    Enemy EnemyMov;
-    public Transform Target;
-    public Transform Brujula;
+    [SerializeField] Enemy EnemyMov;
 
-    [SerializeField] float detectado;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,8 +61,11 @@ public class GestorDeteccion : MonoBehaviour
     void Detectar()
     {
         if (detectado > 0)
-        { detectado -= 1 * Time.deltaTime; }
-        EnemyMov.target = Target;
+        {
+            detectado -= 1 * Time.deltaTime;
+        }
+
+        EnemyMov.Target1 = Target;
         float MaxDist = DistanciaDetectar;
         RaycastHit hit;
 
@@ -75,35 +83,35 @@ public class GestorDeteccion : MonoBehaviour
                     Debug.Log("Visto");
                     Target = hit.transform;
                     EnemyMov.AsignarTarget(hit.transform);
-                    EnemyMov.zombiType = Enemy.Zombie.Perseguir;
+                    EnemyMov.ZombiType = Enemy.Zombie.Perseguir;
                     detectado = 15;
                 }
                 else if (IsDestectable)
                 {
-                    bool ZombiePerseguir = EnemyMov.zombiType == Enemy.Zombie.Reposo;
+                    bool ZombiePerseguir = EnemyMov.ZombiType == Enemy.Zombie.Reposo;
                     Debug.Log("Detectado");
-                    EnemyMov.zombiType = Enemy.Zombie.Mirar;
+                    EnemyMov.ZombiType = Enemy.Zombie.Mirar;
                     Vision.LookAt(DP.Player1);
                     EnemyMov.AsignarTarget(DP.Player1);
                 }
 
                 else if (!IsDestectable && !hit.transform.CompareTag("Player"))
                 {
-                    EnemyMov.zombiType = Enemy.Zombie.Reposo;
+                    EnemyMov.ZombiType = Enemy.Zombie.Reposo;
                 }
             }
 
             else if (IsDestectable && !isHit)
             {
-                bool ZombiePerseguir = EnemyMov.zombiType == Enemy.Zombie.Reposo;
+                bool ZombiePerseguir = EnemyMov.ZombiType == Enemy.Zombie.Reposo;
                 Debug.Log("puto");
-                EnemyMov.zombiType = Enemy.Zombie.Mirar;
+                EnemyMov.ZombiType = Enemy.Zombie.Mirar;
                 EnemyMov.AsignarTarget(DP.Player1);
             }
 
             else if (!IsDestectable && !isHit)
             {
-                EnemyMov.zombiType = Enemy.Zombie.Reposo;
+                EnemyMov.ZombiType = Enemy.Zombie.Reposo;
             }
         }
 
@@ -111,11 +119,13 @@ public class GestorDeteccion : MonoBehaviour
         {
             if (hit.transform.CompareTag("Player"))
             {
+                
                 Debug.Log("Visto");
                 detectado = 15;
                 Target = hit.transform;
                 EnemyMov.AsignarTarget(hit.transform);
-                EnemyMov.zombiType = Enemy.Zombie.Perseguir;
+                EnemyMov.ZombiType = Enemy.Zombie.Perseguir;               
+             
             }
         }
     }

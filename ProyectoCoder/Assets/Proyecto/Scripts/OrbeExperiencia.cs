@@ -25,7 +25,12 @@ public class OrbeExperiencia : MonoBehaviour
 
         if (player)
         {
-            Exp_Suma();
+            bool playerLive = other.GetComponent<MovimientoPlayer>().Vive;
+
+            if (playerLive)
+            {
+              Exp_Suma();
+            }
         }
     }
 
@@ -34,5 +39,10 @@ public class OrbeExperiencia : MonoBehaviour
         GameManager.exp += Experiencia;
         GameManager.exp = Mathf.RoundToInt(GameManager.exp);
         Destroy(gameObject);
+    }
+
+    public void DDL()
+    {
+        DontDestroyOnLoad(gameObject);
     }
 }

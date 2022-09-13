@@ -7,14 +7,14 @@ public class DañoDeEspada : MonoBehaviour
     public Transform Skin;
     public Animator anim;
 
-    [Range(1, 4)]
-    public int Damage;
+    public float Damage;
    List<GameObject> Enemigos = new List<GameObject>();
     int XX;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        PlayerStats.ActualizarValores += DamageValor;
         List();
     }
 
@@ -46,11 +46,29 @@ public class DañoDeEspada : MonoBehaviour
     public void ATK()
     {
         XX = 0;
-         foreach (GameObject X in Enemigos)
-         {
-             X.GetComponent<EnemyHP>().RestarVida(Damage, Skin.forward);
-            if (X.GetComponent<EnemyHP>().HP1<=0) { Enemigos.Remove(X); }
-         }
 
+        //if(Enemigos.ToArray().Length>0)
+        {
+            foreach (GameObject X in Enemigos)
+            {
+                if (X != null)
+                {
+                    X.GetComponent<EnemyHP>().RestarVida(Damage, Skin.forward);
+
+                               if (X.GetComponent<EnemyHP>().HP1 <= 0) { Enemigos.Remove(X); }
+                    //Revisar       
+                }
+            }
+        }
+    }
+
+    public void DamageValor()
+    {
+        Debug.Log("Recibe PlayerStats.ActualizarValores desde " + name);
+        Damage = GameManager.ATK * 0.2f;
+    }
+    private void OnDisable()
+    {
+        PlayerStats.ActualizarValores -= DamageValor;
     }
 }

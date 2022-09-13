@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     private static KeyCode Attack;
     private static KeyCode Roll;
     private static KeyCode Interactuar;
+    private static KeyCode Pocion;
 
     public static KeyCode Up1 { get => Up; set => Up = value; }
     public static KeyCode Down1 { get => Down; set => Down = value; }
@@ -32,7 +33,13 @@ public class GameManager : MonoBehaviour
     public static KeyCode Interactuar1 { get => Interactuar; set => Interactuar = value; }
     public static AudioSource AS1 { get => AS; set => AS = value; }
     public static AudioSource Musica_AS1 { get => Musica_AS; set => Musica_AS = value; }
+    public static KeyCode Pocion1 { get => Pocion; set => Pocion = value; }
 
+    public static float ATK;
+    public static float HP;
+    public static float SPD;
+    public static float Exp_Requisito;
+    public static int  Lvl;
 
     // Start is called before the first frame update
     void Awake()
@@ -52,6 +59,15 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         AS1 = GetComponentInChildren<AudioSource>();
+        if (HP == 0)
+        { HP = 4; }
+        if (ATK == 0)
+        { ATK = 4; }
+        if (SPD == 0)
+        { SPD = 4; }
+        if (Lvl == 0)
+        { Lvl = 1; }
+        Exp_Requisito = Lvl * 10;
     }
 
     // Update is called once per frame

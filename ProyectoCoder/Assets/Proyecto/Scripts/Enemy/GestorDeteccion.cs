@@ -44,12 +44,12 @@ public class GestorDeteccion : MonoBehaviour
         float MaxDist = DistanciaDetectar;
         RaycastHit hit;
 
-        bool isHit = Physics.BoxCast(Vision.transform.position, transform.lossyScale / 2, Vision.forward, out hit, Quaternion.identity, MaxDist);
+        bool isHit = Physics.BoxCast(Vision.transform.position, transform.lossyScale, Vision.forward, out hit, Quaternion.identity, MaxDist);
         if (isHit)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawRay(Vision.transform.position, Vision.forward * hit.distance);
-            Gizmos.DrawWireCube(Vision.transform.position + Vision.forward * hit.distance, transform.lossyScale);
+            Gizmos.DrawWireCube(Vision.transform.position + Vision.forward * hit.distance, transform.lossyScale*2);
         }
         else
         {
@@ -69,7 +69,7 @@ public class GestorDeteccion : MonoBehaviour
         float MaxDist = DistanciaDetectar;
         RaycastHit hit;
 
-        bool isHit = Physics.BoxCast(Vision.transform.position, transform.lossyScale / 2, Vision.forward, out hit, Quaternion.identity, MaxDist);
+        bool isHit = Physics.BoxCast(Vision.transform.position, transform.lossyScale, Vision.forward, out hit, Quaternion.identity, MaxDist);
         bool IsDestectable = DP.Player1 != null;
 
       
@@ -104,7 +104,6 @@ public class GestorDeteccion : MonoBehaviour
             else if (IsDestectable && !isHit)
             {
                 bool ZombiePerseguir = EnemyMov.ZombiType == Enemy.Zombie.Reposo;
-                Debug.Log("puto");
                 EnemyMov.ZombiType = Enemy.Zombie.Mirar;
                 EnemyMov.AsignarTarget(DP.Player1);
             }

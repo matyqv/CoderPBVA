@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 7979977734632234238}
   - component: {fileID: 8387426726297047687}
   - component: {fileID: 5923057858649291561}
+  - component: {fileID: 1251437950}
   m_Layer: 0
   m_Name: Circulo Luz
   m_TagString: Untagged
@@ -309,6 +310,23 @@ CapsuleCollider:
   m_Height: 2.2887874
   m_Direction: 1
   m_Center: {x: 0, y: -0.040317666, z: -0.00000000480624}
+--- !u!114 &1251437950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5106979690847263176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a2795f326edb0458f9be4e4a25a6e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ngo: {r: 0, g: 0, b: 0, a: 0}
+  Bco: {r: 0, g: 0, b: 0, a: 0}
+  Circulo: {fileID: 5893103306338197430}
+  Luz: {fileID: 587062559886043271}
+  Destellos: {fileID: 6471516476200530073}
 --- !u!1 &6471516476200530073
 GameObject:
   m_ObjectHideFlags: 0

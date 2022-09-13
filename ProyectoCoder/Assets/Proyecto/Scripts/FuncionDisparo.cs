@@ -24,12 +24,12 @@ public class FuncionDisparo : MonoBehaviour
         float MaxDist = DistanciaDetectar;
         RaycastHit hit;
 
-        bool isHit = Physics.BoxCast(WP_Disparo.transform.position, transform.lossyScale / 5, WP_Disparo.forward, out hit, Quaternion.identity, MaxDist);
+        bool isHit = Physics.BoxCast(WP_Disparo.transform.position, transform.lossyScale /3, WP_Disparo.forward, out hit, Quaternion.identity, MaxDist);
         if (isHit)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawRay(WP_Disparo.transform.position, WP_Disparo.forward * hit.distance);
-            Gizmos.DrawWireCube(WP_Disparo.transform.position + WP_Disparo.forward * hit.distance, transform.lossyScale/5);
+            Gizmos.DrawWireCube(WP_Disparo.transform.position + WP_Disparo.forward * hit.distance, transform.lossyScale/3);
         }
         else
         {
@@ -45,7 +45,7 @@ public class FuncionDisparo : MonoBehaviour
 
         float MaxDist = DistanciaDetectar;
         RaycastHit hit;
-        bool isHit = Physics.BoxCast(WP_Disparo.transform.position, transform.lossyScale /5, WP_Disparo.forward, out hit, Quaternion.identity, MaxDist);
+        bool isHit = Physics.BoxCast(WP_Disparo.transform.position, transform.lossyScale /3, WP_Disparo.forward, out hit, Quaternion.identity, MaxDist);
         if (isHit)
         {
             if (hit.transform.CompareTag("Player"))

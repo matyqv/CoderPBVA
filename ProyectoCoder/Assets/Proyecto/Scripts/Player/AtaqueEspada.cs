@@ -13,11 +13,11 @@ public class AtaqueEspada : MonoBehaviour
 
     //PlayerEstamina Estamina;
 
-    private bool puedeRotar=true;
-    private bool puedeAtacar = true;
-    [Range(0,10)]
+   [SerializeField] private bool puedeRotar=true;
+    [SerializeField] private bool puedeAtacar = true;
+    [Range(0,200)]
     [SerializeField] private float tiempoAtaque;
-    [Range(0,10)]
+    [Range(0,200)]
     [SerializeField] private float tiempoRotar;
 
     public bool PuedeRotar { get => puedeRotar; set => puedeRotar = value; }
@@ -30,7 +30,10 @@ public class AtaqueEspada : MonoBehaviour
     void Start()
     {
         movimiento = GetComponent<MovimientoPlayer>();
-      //  Estamina=movimiento.transform.gameObject.GetComponent<PlayerEstamina>();
+    }
+    void Awake()
+    {
+        PlayerStats.ActualizarValores += ActualizarTiempos;
     }
 
     // Update is called once per frame
@@ -95,6 +98,7 @@ public class AtaqueEspada : MonoBehaviour
             GS.Rep_Rol();
 
             Anim.SetTrigger("Rol");
+
             PuedeRotar = false;
             Invoke("reestablecerRotacion", TiempoRotar * Time.deltaTime);
         }
@@ -105,4 +109,16 @@ public class AtaqueEspada : MonoBehaviour
 
     void reestablecerRotacion()
     { PuedeRotar = true; }
+
+    void ActualizarTiempos()
+    {
+        Debug.Log("Recibe PlayerStats.ActualizarValores Desde " + name);
+        tiempoAtaque = 90 - GameManager.SPD * 10;
+        tiempoRotar = 70 - GameManager.SPD * 10;
+    }
+
+    private void OnDisable()
+    {
+        PlayerStats.ActualizarValores -= ActualizarTiempos;
+    }
 }

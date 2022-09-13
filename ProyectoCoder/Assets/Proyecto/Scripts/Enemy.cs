@@ -151,6 +151,16 @@ public class Enemy : MonoBehaviour
     {
         Experiencia.GetComponent<OrbeExperiencia>().Experiencia = Exp;
         Instantiate(Experiencia, transform.position, Quaternion.identity);
+
+        int Probabilidad = Random.Range(1, 100);
+
+        if (Probabilidad > 70)
+        {
+
+            GameObject Pota = ObjetosADropear.Pocion;
+            Instantiate(Pota, transform.position, Quaternion.identity);
+
+        }
     }
 
     public void AsignarTarget(Transform T)

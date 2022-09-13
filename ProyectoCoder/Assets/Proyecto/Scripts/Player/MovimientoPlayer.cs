@@ -30,11 +30,20 @@ public class MovimientoPlayer : MonoBehaviour
     public KeyCode But_R;
     public KeyCode But_L;
 
+    public GameObject CalizExperiencia;
+
     // Start is called before the first frame update
+    private void Awake()
+    {
+        PlayerHp.OnDead += muerte;
+    }
+
     void Start()
     {
         Anim = Skin.GetComponent<Animator>();
         CC=GetComponent<CharacterController>();
+        CirculoAlquimia.ActivarMeditacion += MeditacionAnim;
+        PlayerStats.RomperMeditacion+= MeditacionAnimTerminar;
 
     }
 
@@ -131,6 +140,16 @@ public class MovimientoPlayer : MonoBehaviour
     {
         Vive = false;
         Anim.SetTrigger("Die");
+        GameObject Caliz=Instantiate(CalizExperiencia, transform.position, Quaternion.identity);
+        Caliz.GetComponent<OrbeExperiencia>().Experiencia = Mathf.RoundToInt(GameManager.exp);
+        Caliz.GetComponent<OrbeExperiencia>().DDL();
+        if (Anim.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+        {
+            if (Anim.GetCurrentAnimatorStateInfo(0).length > 0.8f)
+            {
+                Anim.enabled = false;
+            }
+        }
     }
     public void Caer()
     {
@@ -139,5 +158,23 @@ public class MovimientoPlayer : MonoBehaviour
             Anim.SetBool("EnPiso", false);
             Mov(Brujula.transform.forward, 0.5f);
         }
+    }
+    public void MeditacionAnim()
+    {
+        Anim.SetBool("Med", true);
+        Anim.SetBool("Die", true);
+        Debug.Log("Recibe CirculoAlquimia.ActivarMeditacion desde " + name);
+    }
+    public void MeditacionAnimTerminar()
+    {
+        Anim.SetBool("Die", false);
+        Anim.SetBool("Med", false);
+        Debug.Log("Recibe PlayerStats.RomperMeditacion desde " + name);
+    }
+    public void OnDisable()
+    {
+        PlayerHp.OnDead -= muerte;
+        PlayerStats.RomperMeditacion -= MeditacionAnimTerminar;
+        CirculoAlquimia.ActivarMeditacion -= MeditacionAnim;
     }
 }

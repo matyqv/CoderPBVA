@@ -12,9 +12,9 @@ public class Puerta : MonoBehaviour
     public ScriptPalanca[] Palancas;
 
     public AudioClip PuertaClip;
-    public AudioClip CandadoClip;
 
-    int Sonido=-1;
+    [SerializeField] int Cantidad;
+    [SerializeField] int CantidadNecesaria;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,15 +25,13 @@ public class Puerta : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Palancas[0].Activado1 && Palancas[1].Activado1)
+        if (Cantidad == CantidadNecesaria)
         {
-            if (Sonido==1) { dispararSonido(); }
-            Cerrar();
-        }
-        if (!Palancas[0].Activado1 && !Palancas[1].Activado1)
-        {
-            if (Sonido ==-1) { dispararSonido(); }
             Abrir();
+        }
+        if (Cantidad != CantidadNecesaria)
+        {
+            Cerrar();
         }
     }
 
@@ -62,8 +60,13 @@ public class Puerta : MonoBehaviour
     {
         AudioSource AS = GameManager.AS1;
         AS.PlayOneShot(PuertaClip,.6f);
-        AS.PlayOneShot(CandadoClip, .6f);
-        Sonido =-Sonido;
+    }
 
+    public void SumarClave(int N)
+    {
+        Cantidad += N;
+        if (Cantidad == CantidadNecesaria) { dispararSonido(); }
+        if (Cantidad == 0) { dispararSonido(); }
+        Debug.Log(name+" Recibio la señal");
     }
 }

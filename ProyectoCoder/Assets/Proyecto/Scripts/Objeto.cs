@@ -20,14 +20,28 @@ public class Objeto : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-
-         if (other.gameObject.CompareTag("Player"))
+        if (NAME != "Pocion")
         {
-            Debug.Log(other.tag);
-            PlayerKeys KY=other.GetComponent<PlayerKeys>();
+            if (other.gameObject.CompareTag("Player"))
+            {
+                PlayerKeys KY = other.GetComponent<PlayerKeys>();
 
-            GameManager.AS1.PlayOneShot(GetObjeto,1f);
-            KY.AdherirKey(this.transform.gameObject);
+                GameManager.AS1.PlayOneShot(GetObjeto, 1f);
+                KY.AdherirKey(this.transform.gameObject);
+            }
         }
+
+        if (NAME == "Pocion")
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                Debug.Log(other.tag);
+                PlayerKeys KY = other.GetComponent<PlayerKeys>();
+
+                GameManager.AS1.PlayOneShot(GetObjeto, 1f);
+                KY.AddObjeto(this.transform.gameObject);
+            }
+        }
+
     }
 }

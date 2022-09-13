@@ -13,6 +13,7 @@ public class ControlManager : MonoBehaviour
     public  KeyCode Attack;
     public  KeyCode Roll;
     public  KeyCode Interactuar;
+    public  KeyCode Pocion;
 
     public AudioSource AS;
     public AudioSource Musica_AS;
@@ -26,6 +27,7 @@ public class ControlManager : MonoBehaviour
         GameManager.Attack1= Attack;
         GameManager.Roll1 = Roll;
         GameManager.Interactuar1 = Interactuar;
+        GameManager.Pocion1 = Pocion;
 
         GameManager.AS1 = AS;
         GameManager.Musica_AS1 = Musica_AS;
@@ -34,6 +36,15 @@ public class ControlManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        GameManager.Up1 = Up;
+        GameManager.Down1 = Down;
+        GameManager.Left1 = Left;
+        GameManager.Right1 = Right;
+        GameManager.Attack1 = Attack;
+        GameManager.Roll1 = Roll;
+        GameManager.Interactuar1 = Interactuar;
+
+        GameManager.AS1 = AS;
+        GameManager.Musica_AS1 = Musica_AS;
     }
 }

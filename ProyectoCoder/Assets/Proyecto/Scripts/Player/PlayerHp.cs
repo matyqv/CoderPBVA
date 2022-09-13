@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class PlayerHp : MonoBehaviour
 {
@@ -15,8 +16,15 @@ public class PlayerHp : MonoBehaviour
     
     [SerializeField] private Image UnidadDeVida;
     [SerializeField] private Image UnidadDeVidaBase;
-    [SerializeField] private GameObject PlacaDeMuerte;
+
+    public static event Action OnDead;
     // Start is called before the first frame update
+
+    void Awake()
+    {
+        PlayerStats.ActualizarValores += RevisarVida;
+        PlayerKeys.RevisarVida += RevisarVida;
+    }
     void Start()
     {
         Player = GetComponent<MovimientoPlayer>();
@@ -37,15 +45,15 @@ public class PlayerHp : MonoBehaviour
         if (Player.Vive)
         {
             Time.timeScale = 0.05f;
-            Invoke("TimeIs1", 0.1f * Time.deltaTime);
+            Invoke("TimeIs1", 0.2f * Time.deltaTime);
             Anim.SetTrigger("GetHit");
             HP -= Daño;
             RevisarVida();
             Player.CC.Move(V * 1);
             if (HP <= 0)
             {
-                Player.muerte();
-                PlacaDeMuerte.SetActive(true);
+                OnDead?.Invoke();
+                Debug.Log("Envia OnDead desde " + name);
             }
         }
     }
@@ -57,9 +65,18 @@ public class PlayerHp : MonoBehaviour
 
     void RevisarVida()
     {
-        HPInicial_ = HPInicial;
+        HPInicial_ = GameManager.HP;
         float Tamaño = HPInicial_ / 10;
         UnidadDeVida.fillAmount = (HP / 10);
         UnidadDeVidaBase.fillAmount = Tamaño;
+
+        //no simpre se llama desde este metodo
+        Debug.Log("Recibe PlayerStats.ActualizarValores Desde " + name);
+    }
+
+    private void OnDisable()
+    {
+        PlayerStats.ActualizarValores -= RevisarVida;
+        PlayerKeys.RevisarVida -= RevisarVida;
     }
 }

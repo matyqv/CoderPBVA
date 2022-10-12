@@ -10,16 +10,8 @@ public class MuerteReinicio : MonoBehaviour
 
     public void Awake()
     {
-        Debug.Log("EjecutarAwake");
-        if (instancia == null)
-        {
-            instancia = this;
             Debug.Log(instancia);
             PlayerHp.OnDead += GameOver;
-            DontDestroyOnLoad(gameObject);
-
-        }
-        else { Destroy(gameObject); }
     }
     // Update is called once per frame
     void Update()

@@ -14,6 +14,9 @@ public class ControlManager : MonoBehaviour
     public  KeyCode Roll;
     public  KeyCode Interactuar;
     public  KeyCode Pocion;
+    public  KeyCode GuardarArma;
+
+    public  KeyCode Disparar;
 
     public AudioSource AS;
     public AudioSource Musica_AS;
@@ -43,6 +46,9 @@ public class ControlManager : MonoBehaviour
         GameManager.Attack1 = Attack;
         GameManager.Roll1 = Roll;
         GameManager.Interactuar1 = Interactuar;
+        GameManager.Pocion1 = Pocion;
+        GameManager.GuardarArma1 = GuardarArma;
+        GameManager.Disparar1= Disparar;
 
         GameManager.AS1 = AS;
         GameManager.Musica_AS1 = Musica_AS;

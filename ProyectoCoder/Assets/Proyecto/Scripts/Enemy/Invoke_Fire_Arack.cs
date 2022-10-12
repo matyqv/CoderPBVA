@@ -19,7 +19,7 @@ public class Invoke_Fire_Arack : MonoBehaviour
     public void InvocarFuego()
     {
         GameObject ATK=transform.parent.GetComponent<Mago_Enemy>().FireAtack;
-        ATK.GetComponent<Fire_Atack>().Target = transform.parent.GetComponent<Mago_Enemy>().Target1;
+        ATK.GetComponent<Fire_Atack>().Target = transform.parent.GetComponent<Mago_Enemy>().TargetVisual;
 
         Instantiate(ATK, transform.position, Quaternion.identity);
     }

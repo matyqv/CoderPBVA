@@ -25,6 +25,7 @@ public class HudPlayer : MonoBehaviour
         CirculoAlquimia.CartelCirculoInicial += DatosDeCartel;
         CirculoAlquimia.ActivarMeditacion += ActivarMeditacion;
         PlayerKeys.Pociones+= ModificarPociones;
+        TrigerEventCartelObjeto.CartelEmergente2 += DatosDeCartel2;
 
     }
 
@@ -56,11 +57,11 @@ public class HudPlayer : MonoBehaviour
     {
         Debug.Log("recibe CirculoAlquimia.CartelCirculoInicial " + name);
 
-        CartelEmergente.
+        CartelEmergente2.
             GetComponent<Image>().color = C;
-        CartelEmergente.transform.GetChild(0).
+        CartelEmergente2.transform.GetChild(0).
             GetComponent<TextMeshProUGUI>().text = S;
-        CartelEmergente.SetActive(B);
+        CartelEmergente2.SetActive(B);
     }
 
     private void OnDisable()
@@ -69,6 +70,7 @@ public class HudPlayer : MonoBehaviour
         CirculoAlquimia.CartelCirculoInicial-= DatosDeCartel;
         CirculoAlquimia.ActivarMeditacion -= ActivarMeditacion;
         PlayerKeys.Pociones -= ModificarPociones;
+        TrigerEventCartelObjeto.CartelEmergente2 -= DatosDeCartel2;
     }
 
     void ActivarMeditacion()

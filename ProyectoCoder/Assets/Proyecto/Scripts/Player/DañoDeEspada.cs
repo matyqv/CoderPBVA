@@ -33,11 +33,21 @@ public class DañoDeEspada : MonoBehaviour
         {
             Enemigos.Add(other.transform.gameObject);
         }
+
+        if (other.gameObject.CompareTag("Boss"))
+        {
+            Enemigos.Add(other.transform.gameObject);
+        }
     }   
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy") )
+        {
+            Enemigos.Remove(other.transform.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("Boss"))
         {
             Enemigos.Remove(other.transform.gameObject);
         }
@@ -53,9 +63,18 @@ public class DañoDeEspada : MonoBehaviour
             {
                 if (X != null)
                 {
-                    X.GetComponent<EnemyHP>().RestarVida(Damage, Skin.forward);
+                    if (X.CompareTag("Enemy"))
+                    {
+                        X.GetComponent<EnemyHP>().RestarVida(Damage, Skin.forward);
 
-                               if (X.GetComponent<EnemyHP>().HP1 <= 0) { Enemigos.Remove(X); }
+                        if (X.GetComponent<EnemyHP>().HP1 <= 0) { Enemigos.Remove(X); break; }
+                    }
+                    if (X.CompareTag("Boss"))
+                    {
+                        X.GetComponent<HP_BOSS>().RestarVida(Damage);
+
+                        if (X.GetComponent<HP_BOSS>().HP1 <= 0) { Enemigos.Remove(X); break; }
+                    }
                     //Revisar       
                 }
             }

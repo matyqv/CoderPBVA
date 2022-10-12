@@ -17,9 +17,13 @@ public class Objeto : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.Rotate(0, 30 * Time.deltaTime, 0);
     }
     void OnTriggerEnter(Collider other)
     {
+
+        TrigerEventCartelObjeto Mensajero = GetComponent<TrigerEventCartelObjeto>();
+
         if (NAME != "Pocion")
         {
             if (other.gameObject.CompareTag("Player"))
@@ -28,6 +32,7 @@ public class Objeto : MonoBehaviour
 
                 GameManager.AS1.PlayOneShot(GetObjeto, 1f);
                 KY.AdherirKey(this.transform.gameObject);
+                Mensajero.EnviarMensaje(NAME + " (1)");
             }
         }
 
@@ -40,8 +45,10 @@ public class Objeto : MonoBehaviour
 
                 GameManager.AS1.PlayOneShot(GetObjeto, 1f);
                 KY.AddObjeto(this.transform.gameObject);
+                Mensajero.EnviarMensaje(NAME + " (+1)" );
             }
         }
-
     }
+
+
 }

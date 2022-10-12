@@ -6,7 +6,9 @@ public class GestorDeteccion : MonoBehaviour
 {
     [Header("Dinamicas")]
 
-    public Transform Target;
+    public Transform TargetSonido;
+    public Transform TargetVisual;
+    [SerializeField] bool RastroPerdido;
     [SerializeField] float detectado;
 
     [Header("Estaticas")]
@@ -14,12 +16,10 @@ public class GestorDeteccion : MonoBehaviour
     [SerializeField] private Transform Brujula;
     [SerializeField] private Transform Head;
     [SerializeField] private Transform Vision;
-    [SerializeField] private DetectarPlayer DP;
     [Range(0, 30)]
-    [SerializeField] private float DistanciaDetectar;
     [SerializeField] Enemy EnemyMov;
 
-
+    public bool testHit;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,10 +35,11 @@ public class GestorDeteccion : MonoBehaviour
             Vision.transform.position = Head.transform.position;
             Vision.transform.eulerAngles = Direccion;
         }
-        else { Vision.LookAt(Target); }
+        else { Vision.LookAt(TargetSonido); }
 
         Detectar();
     }
+    /*
     private void OnDrawGizmos()
     {
         float MaxDist = DistanciaDetectar;
@@ -56,76 +57,53 @@ public class GestorDeteccion : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawRay(Vision.transform.position, Vision.forward * MaxDist);
         }
-    }
+    }*/
 
     void Detectar()
     {
-        if (detectado > 0)
-        {
-            detectado -= 1 * Time.deltaTime;
-        }
-
-        EnemyMov.Target1 = Target;
-        float MaxDist = DistanciaDetectar;
-        RaycastHit hit;
-
-        bool isHit = Physics.BoxCast(Vision.transform.position, transform.lossyScale, Vision.forward, out hit, Quaternion.identity, MaxDist);
-        bool IsDestectable = DP.Player1 != null;
-
-      
 
         if (detectado<=0)
         {
-            if (isHit)
+            if (TargetVisual != null)
             {
-                if (hit.transform.CompareTag("Player"))
-                {
-                    Debug.Log("Visto");
-                    Target = hit.transform;
-                    EnemyMov.AsignarTarget(hit.transform);
-                    EnemyMov.ZombiType = Enemy.Zombie.Perseguir;
-                    detectado = 15;
-                }
-                else if (IsDestectable)
-                {
-                    bool ZombiePerseguir = EnemyMov.ZombiType == Enemy.Zombie.Reposo;
-                    Debug.Log("Detectado");
-                    EnemyMov.ZombiType = Enemy.Zombie.Mirar;
-                    Vision.LookAt(DP.Player1);
-                    EnemyMov.AsignarTarget(DP.Player1);
-                }
-
-                else if (!IsDestectable && !hit.transform.CompareTag("Player"))
-                {
-                    EnemyMov.ZombiType = Enemy.Zombie.Reposo;
-                }
+                EnemyMov.AsignarTargetVisual(TargetVisual);
+                EnemyMov.ZombiType = Enemy.Zombie.Perseguir;
             }
-
-            else if (IsDestectable && !isHit)
+            if (TargetSonido != null && TargetVisual == null)
             {
-                bool ZombiePerseguir = EnemyMov.ZombiType == Enemy.Zombie.Reposo;
+                EnemyMov.AsignarTargetSonoro(TargetSonido);
                 EnemyMov.ZombiType = Enemy.Zombie.Mirar;
-                EnemyMov.AsignarTarget(DP.Player1);
             }
-
-            else if (!IsDestectable && !isHit)
+        }
+        if (RastroPerdido)
+        {
+            detectado -= 5 * Time.deltaTime;
+            if (detectado < 0)
             {
                 EnemyMov.ZombiType = Enemy.Zombie.Reposo;
+                TargetVisual = null;
             }
         }
 
-        if (isHit)
-        {
-            if (hit.transform.CompareTag("Player"))
-            {
-                
-                Debug.Log("Visto");
-                detectado = 15;
-                Target = hit.transform;
-                EnemyMov.AsignarTarget(hit.transform);
-                EnemyMov.ZombiType = Enemy.Zombie.Perseguir;               
-             
-            }
-        }
+    }
+
+    public void DetectorSonido(Transform T)
+    {
+        TargetSonido = T;
+    }
+
+    public void DetectorVisual(Transform T)
+    {
+        TargetVisual = T;
+        EnemyMov.AsignarTargetVisual(T);
+        RastroPerdido = false;
+        detectado = 40;
+    }
+    public void NoDetectorSonido()
+    { TargetSonido = null; }
+
+    public void NoDetectorVisual()
+    {
+        RastroPerdido=true;
     }
 }

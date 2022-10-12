@@ -10,6 +10,15 @@ public class Mele_Enemy : Enemy
 
         Anim = Skin.GetComponent<Animator>();
         CC = GetComponent<CharacterController>();
+        
+        if (WP_Cantidades != null)
+        {
+            for (int i = 0;i< WP_Cantidades.transform.childCount;i++)
+            {
+                WP.Add(WP_Cantidades.transform.GetChild(i).transform);               
+            }
+            ZombiType = Zombie.Guardia;
+        }
     }
 
     // Update is called once per frame
@@ -49,7 +58,7 @@ public class Mele_Enemy : Enemy
         AnimatorStateInfo StatInfo = Anim.GetCurrentAnimatorStateInfo(0);
         if (StatInfo.IsTag("AT"))
         {
-            RedVelocidadLerp = 3.5f;
+            RedVelocidadLerp = 500f;
         }
         else if (!StatInfo.IsTag("AT")) { RedVelocidadLerp = 1; }
     }

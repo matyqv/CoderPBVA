@@ -44,6 +44,11 @@ public class PlayerKeys : MonoBehaviour
         Other.transform.gameObject.SetActive(false);
         Pociones?.Invoke(Pocion);
     }
+    public void AddPocion()
+    {
+        Pocion += 1;
+        Pociones?.Invoke(Pocion);
+    }
 
     public void consumirpocion()
     {

@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     private static KeyCode Roll;
     private static KeyCode Interactuar;
     private static KeyCode Pocion;
+    private static KeyCode GuardarArma;
+    private static KeyCode Disparar;
 
     public static KeyCode Up1 { get => Up; set => Up = value; }
     public static KeyCode Down1 { get => Down; set => Down = value; }
@@ -34,6 +36,8 @@ public class GameManager : MonoBehaviour
     public static AudioSource AS1 { get => AS; set => AS = value; }
     public static AudioSource Musica_AS1 { get => Musica_AS; set => Musica_AS = value; }
     public static KeyCode Pocion1 { get => Pocion; set => Pocion = value; }
+    public static KeyCode GuardarArma1 { get => GuardarArma; set => GuardarArma = value; }
+    public static KeyCode Disparar1 { get => Disparar; set => Disparar = value; }
 
     public static float ATK;
     public static float HP;

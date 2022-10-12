@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 1756402625279635995}
   - component: {fileID: 2293818322820789792}
   - component: {fileID: 444953842301874019}
+  - component: {fileID: 5875665195245089509}
   m_Layer: 0
   m_Name: Poscion
   m_TagString: Untagged
@@ -144,6 +145,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.02, y: 0.02, z: 0.02}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5875665195245089509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374774695994026145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 580aeb3f88ad37f46a9fda2afc91c660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2293818323227991902
 GameObject:
   m_ObjectHideFlags: 0

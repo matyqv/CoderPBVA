@@ -23,7 +23,15 @@ public class EnemyMeleAtk : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Skin = other.gameObject.transform;
             other.GetComponent<PlayerHp>().RestarVida(Damage, Skin.transform.forward);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Skin = null;
         }
     }
 }

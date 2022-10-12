@@ -109,7 +109,7 @@ public class MovimientoPlayer : MonoBehaviour
     public void Rot(Vector3 V)
     {
         Brujula.transform.LookAt(Brujula.transform.position+V);
-        Skin.rotation = Quaternion.Lerp(Skin.rotation, Brujula.transform.rotation, 15f * Time.deltaTime);      
+        Skin.rotation = Quaternion.Lerp(Skin.rotation, Brujula.transform.rotation, speed*1.5f * Time.deltaTime);      
     }
 
     public void Roll()

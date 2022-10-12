@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5363433860016479825}
   - component: {fileID: 3008851352361899199}
   - component: {fileID: 8244675605780208698}
+  - component: {fileID: -3174413092525140370}
   m_Layer: 0
   m_Name: Llave
   m_TagString: Untagged
@@ -98,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NAME: 
-  GO: {fileID: 0}
+  GO: {fileID: 5867700885294563204}
   GetObjeto: {fileID: 8300000, guid: 4bfac15be46d06c469401298261c73d6, type: 3}
 --- !u!65 &8244675605780208698
 BoxCollider:
@@ -113,6 +114,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.025000006, y: 0.04491648, z: 0.01}
   m_Center: {x: 5.935573e-10, y: -0.009958239, z: 9.31323e-10}
+--- !u!114 &-3174413092525140370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5867700885294563204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 580aeb3f88ad37f46a9fda2afc91c660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6750661698471007817
 PrefabInstance:
   m_ObjectHideFlags: 0

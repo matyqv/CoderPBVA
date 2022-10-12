@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Playerr
   - Invulnerable
+  - Bala
+  - Boss
   layers:
   - Default
   - TransparentFX
